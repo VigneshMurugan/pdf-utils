@@ -1,12 +1,17 @@
 # Dependencies
 node_modules/
+*/node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
+*/package-lock.json
 
 # Production builds
 /client/build
 /server/dist
+build/
+dist/
 
 # Environment variables
 .env
@@ -14,20 +19,37 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+server/.env
+client/.env
 
 # Uploads (temporary files)
 /server/uploads
+uploads/
 
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # OS
 .DS_Store
 Thumbs.db
+*.tmp
 
 # Logs
 *.log
+logs/
 
 # Vercel
 .vercel
+.vercel.json
+
+# Cache
+.cache/
+.parcel-cache/
+.next/
+
+# Testing
+coverage/
+.nyc_output/
