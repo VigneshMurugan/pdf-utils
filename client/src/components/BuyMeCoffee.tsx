@@ -14,8 +14,7 @@ export const BuyMeCoffee: React.FC = () => {
   useEffect(() => {
     const fetchDonationLink = async () => {
       try {
-        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001';
-        const response = await fetch(`${apiUrl}/api/donation-link`);
+        const response = await fetch('http://localhost:5001/api/donation-link');
         const data = await response.json();
         setDonationInfo(data);
       } catch (error) {

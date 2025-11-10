@@ -53,9 +53,8 @@ export const HomePage: React.FC = () => {
       formData.append('pdf', selectedFile);
       formData.append('password', password);
 
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001';
       const response = await axios.post<UnlockResponse>(
-        `${apiUrl}/api/unlock-pdf`,
+        'http://localhost:5001/api/unlock-pdf',
         formData,
         {
           headers: {
@@ -83,9 +82,8 @@ export const HomePage: React.FC = () => {
     if (!result) return;
 
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001';
       const response = await axios.get(
-        `${apiUrl}${result.downloadUrl}`,
+        `http://localhost:5001${result.downloadUrl}`,
         {
           responseType: 'blob',
         }

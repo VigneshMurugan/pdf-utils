@@ -13,33 +13,12 @@ const PORT = process.env.PORT || 5001;
 
 // Middleware
 app.use(helmet());
-
-// CORS configuration for production
-const corsOptions = {
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:3001', 
-    'http://localhost:3002',
-    'https://pdf-utils-frontend.vercel.app',
-    'https://pdf-utils-frontend-nxa7ag70m-vigneshmurugans-projects.vercel.app',
-    /\.vercel\.app$/,  // Allow all Vercel preview deployments
-  ],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
-// Create uploads directory if it doesn't exist (for local development)
-const uploadsDir = process.env.VERCEL 
-  ? '/tmp/uploads' 
-  : path.join(__dirname, 'uploads');
-
-if (!process.env.VERCEL) {
-  fs.ensureDirSync(uploadsDir);
-}
+// Create uploads directory if it doesn't exist
+const uploadsDir = path.join(__dirname, 'uploads');
+fs.ensureDirSync(uploadsDir);
 
 // Rate limiting
 const limiter = rateLimit({
@@ -256,13 +235,7 @@ app.use((error, req, res, next) => {
   res.status(500).json({ error: 'Internal server error' });
 });
 
-// Start server only in non-Vercel environment
-if (!process.env.VERCEL) {
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-    console.log(`Health check: http://localhost:${PORT}/api/health`);
-  });
-}
-
-// Export for Vercel
-module.exports = app;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Health check: http://localhost:${PORT}/api/health`);
+});
