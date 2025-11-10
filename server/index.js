@@ -13,7 +13,23 @@ const PORT = process.env.PORT || 5001;
 
 // Middleware
 app.use(helmet());
-app.use(cors());
+
+// CORS configuration for production
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:3001', 
+    'http://localhost:3002',
+    'https://pdf-utils-frontend.vercel.app',
+    'https://pdf-utils-frontend-nxa7ag70m-vigneshmurugans-projects.vercel.app',
+    /\.vercel\.app$/,  // Allow all Vercel preview deployments
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Create uploads directory if it doesn't exist (for local development)
