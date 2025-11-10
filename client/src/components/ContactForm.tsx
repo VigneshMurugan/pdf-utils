@@ -18,7 +18,8 @@ export const ContactForm: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('https://formspree.io/f/mvgdoprb', {
+      const formspreeId = process.env.REACT_APP_FORMSPREE_ID || 'mvgdoprb';
+      const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
