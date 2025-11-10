@@ -1,0 +1,19 @@
+{
+  "name": "pdf-utils",
+  "version": "1.0.0",
+  "description": "A web application for PDF utilities including unlock, merge, split and more",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start"
+  },
+  "keywords": ["pdf", "utilities", "unlock", "merge", "split"],
+  "author": "PDF Utils",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
